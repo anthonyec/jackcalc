@@ -18,16 +18,19 @@ function matchMultiple(str, re) {
 
 const $textareaContainer = document.querySelector('.js-textarea-container');
 const $textarea = document.querySelector('.js-textarea');
+const $version = document.querySelector('.js-version');
 const $backdrop = document.querySelector('.js-backdrop');
 const $calories = document.querySelector('.js-cal-number');
 const $protein = document.querySelector('.js-pro-number');
+
+$version.innerHTML = `${version}`;
 
 function main() {
   const text = $textarea.value;
 
   const numberRegex = /[0-9](\.[0-9]+)?/g
   const calRegexPattern = /(([0-9](\.[0-9]+)?)+.?.?cal)/g;
-  const proRegexPattern = /(([0-9](\.[0-9]+)?)+.?.?g)+(\n|$)/g;
+  const proRegexPattern = /(([0-9](\.[0-9]+)?)+.?.?g)+(\s?\n|$)/g;
 
   const calTexts = text.match(calRegexPattern) || [];
   const proTexts = text.match(proRegexPattern) || [];
@@ -41,7 +44,7 @@ function main() {
   }, 0);
 
   $calories.innerHTML = calTotal.toFixed(2);
-  $protein.innerHTML = proTotal.toFixed(2);
+  $protein.innerHTML = proTotal.toFixed(2) + 'g';
 
   const calMatches = matchMultiple(text, calRegexPattern).map((match) => {
     return {...match, label: 'green'}
