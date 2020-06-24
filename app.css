@@ -30,6 +30,7 @@ body {
   padding-bottom: 58px;
   overflow: hidden;
   padding-bottom: 58px;
+  word-wrap: break-word;
 }
 
 .textarea__input {
