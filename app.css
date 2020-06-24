@@ -17,18 +17,52 @@ body {
 }
 
 .textarea {
-  border: 0;
-  border-radius: 0;
   position: absolute;
   width: 100%;
   height: 100%;
-  resize: none;
-  font-family: inherit;
-  font-weight: 400;
+}
+
+.textarea__backdrop {
+  color: transparent;
   padding: 10px;
   line-height: 1.4;
   font-size: 16px;
   padding-bottom: 58px;
+  overflow: hidden;
+  padding-bottom: 58px;
+}
+
+.textarea__input {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  resize: none;
+  font-family: inherit;
+  padding: 10px;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+.textarea__input:focus {
+  outline: none;
+}
+
+.highlight {
+  border-radius: 3px;
+  background: #eee;
+}
+
+.highlight--green {
+  background: #e2f2d3;
+  /* color: #335712; */
+}
+
+.highlight--pink {
+  background: #ffe6ed;
+  /* color: #69172e; */
 }
 
 .textarea:focus {
@@ -37,7 +71,8 @@ body {
 
 .toolbar {
   background: rgba(255, 255, 255, 0.9);
-  position: absolute;
+  backdrop-filter: blur(6px);
+  position: fixed;
   width: 100%;
   bottom: 0;
   padding: 10px;

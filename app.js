@@ -1,17 +1,24 @@
-import { version } from './package.json'
+import { version } from './package.json';
+
+import highlight from './lib/highlight.js';
 
 function matchMultiple(str, re) {
   let indices = [];
+  let match;
 
   while ((match = re.exec(str)) != null) {
-    console.log(match)
-    indices.push(match.index);
+    indices.push({
+      start: match.index,
+      end: match.index + match[0].length
+    });
   }
 
   return indices;
 }
 
+const $textareaContainer = document.querySelector('.js-textarea-container');
 const $textarea = document.querySelector('.js-textarea');
+const $backdrop = document.querySelector('.js-backdrop');
 const $calories = document.querySelector('.js-cal-number');
 const $protein = document.querySelector('.js-pro-number');
 
@@ -35,6 +42,26 @@ function main() {
 
   $calories.innerHTML = calTotal.toFixed(2);
   $protein.innerHTML = proTotal.toFixed(2);
+
+  const calMatches = matchMultiple(text, calRegexPattern).map((match) => {
+    return {...match, label: 'green'}
+  });
+
+  const proMatches = matchMultiple(text, proRegexPattern).map((match) => {
+    return {...match, label: 'pink'}
+  });
+
+  let combinedMatches = [...calMatches, ...proMatches];
+
+  combinedMatches.sort((a, b) => {
+    return a.start - b.start;
+  });
+
+  highlight(
+    $textarea,
+    $backdrop,
+    combinedMatches
+  );
 }
 
 function save() {
@@ -47,12 +74,26 @@ function load() {
   $textarea.value = text;
 }
 
+function resize() {
+  $textarea.style.height = $backdrop.clientHeight + 'px';
+}
+
 load();
 main();
+resize();
 
 $textarea.addEventListener('input', () => {
   main();
   save();
+  resize();
+});
+
+$textareaContainer.addEventListener('click', () => {
+  $textarea.focus();
+});
+
+window.addEventListener('resize', () => {
+  resize();
 });
 
 console.log('version', version);

@@ -10,7 +10,11 @@
   </head>
   <body>
     <div class="app">
-      <textarea class="textarea js-textarea" placeholder="Type or paste your food notes here"></textarea>
+      <div class="textarea js-textarea-container">
+        <div class="textarea__backdrop js-backdrop"></div>
+        <textarea class="textarea__input js-textarea" placeholder="Type or paste your food notes here"></textarea>
+      </div>
+
       <div class="toolbar">
         <div class="calc calc--green">
           <span class="calc__unit">calories</span>
