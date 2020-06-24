@@ -107,4 +107,10 @@ body {
   font-size: 12px;
 }
 
-
+.version {
+  color: gray;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%)
+}
