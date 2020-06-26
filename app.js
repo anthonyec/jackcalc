@@ -1,6 +1,7 @@
 import { version } from './package.json';
 
 import highlight from './lib/highlight.js';
+import { trackPageView } from './lib/stats';
 
 function matchMultiple(str, re) {
   let indices = [];
@@ -100,3 +101,4 @@ window.addEventListener('resize', () => {
 });
 
 console.log('version', version);
+trackPageView();
